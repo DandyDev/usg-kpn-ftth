@@ -3,13 +3,13 @@
         "task-scheduler": {
             "task": {
                 "postprovision": {
-                	"executable": {
+                    "executable": {
                         "path": "/config/scripts/post-config.d/dhcp6.sh"
                     },
                     "interval": "2m"
                 },
                 "postprovisionroutes": {
-                	"executable": {
+                    "executable": {
                         "path": "/config/scripts/post-config.d/setroutes.sh"
                     },
                     "interval": "2m"
@@ -18,21 +18,21 @@
         },
         "offload": {
             "ipv4": {
-                     "forwarding": "enable",
-                     "gre": "enable",
-                     "pppoe": "enable",
-                     "vlan": "enable"
+                "forwarding": "enable",
+                "gre": "enable",
+                "pppoe": "enable",
+                "vlan": "enable"
             },
             "ipv6": {
-                    "forwarding": "enable",
-                    "pppoe": "enable",
-                    "vlan": "disable"
+                "forwarding": "enable",
+                "pppoe": "enable",
+                "vlan": "disable"
             }
         }
     },
     "firewall": {
         "ipv6-name": {
-            "WANv6_LOCAL" : {
+            "WANv6_LOCAL": {
                 "rule": {
                     "1": {
                         "action": "accept",
@@ -44,22 +44,22 @@
                         "action": "accept",
                         "description": "DHCPv6",
                         "destination": {
-                                "port": "546"
+                            "port": "546"
                         },
                         "protocol": "udp",
                         "source": {
-                                "port": "547"
+                            "port": "547"
                         }
                     }
                 }
             },
-            "WANv6_IN" : {
+            "WANv6_IN": {
                 "rule": {
                     "1": {
-                            "action": "accept",
-                            "description": "Allow ICMPv6",
-                            "log": "enable",
-                            "protocol": "icmpv6"
+                        "action": "accept",
+                        "description": "Allow ICMPv6",
+                        "log": "enable",
+                        "protocol": "icmpv6"
                     }
                 }
             }
@@ -116,7 +116,13 @@
                                     "no-dns": "''",
                                     "pd": {
                                         "0": {
-                                            "prefix-length": "48"
+                                            "interface": {
+                                                "eth0": {
+                                                    "prefix-id": ":1",
+                                                    "service": "slaac"
+                                                }
+                                            },
+                                            "prefix-length": "/48"
                                         }
                                     },
                                     "rapid-commit": "disable"
@@ -164,8 +170,8 @@
                         "managed-flag": "true",
                         "max-interval": "600",
                         "name-server": [
-                        	"2606:4700:4700::1111",
-                        	"2606:4700:4700::1001"
+                            "2606:4700:4700::1111",
+                            "2606:4700:4700::1001"
                         ],
                         "other-config-flag": "false",
                         "prefix": {
@@ -245,6 +251,14 @@
                 "6003": {
                     "outbound-interface": "pppoe2"
                 }
+            }
+        },
+        "mdns": {
+            "repeater": {
+                "interface": [
+                    "eth1",
+                    "eth1.66"
+                ]
             }
         }
     }
