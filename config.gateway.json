@@ -256,8 +256,8 @@
         "mdns": {
             "repeater": {
                 "interface": [
-                    "eth1",
-                    "eth1.66"
+                    "eth0",
+                    "eth0.66"
                 ]
             }
         }
